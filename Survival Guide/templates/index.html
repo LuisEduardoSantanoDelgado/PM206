@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survival Guide: El Reto Movil</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&family=Fira+Code:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="background-animation"></div>
+
+    <header class="hero">
+        <h1 class="glitch" data-text="SURVIVAL GUIDE">SURVIVAL GUIDE</h1>
+        <h2>EL RETO MOVIL</h2>
+        <p>Santano Delgado Luis Eduardo</p>
+        <p>Completa las pruebas para desbloquear el conocimiento.</p>
+        {% if nivel > 1 %}
+        <a href="{{ url_for('reset') }}" class="btn-reset">Reiniciar Aventura</a>
+        {% endif %}
+    </header>
+
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <section class="level-card {% if nivel < 1 %}locked{% endif %}" id="level-1">
+            <div class="card-header">
+                <h3>Nivel 1: La Camara de las Reglas</h3>
+                <span class="status-badge">{% if nivel > 1 %}SUPERADO{% elif nivel == 1 %}ACTIVO{% else %}BLOQUEADO{%
+                    endif %}</span>
+            </div>
+
+            {% if nivel >= 1 %}
+            <div class="card-body">
+                {% if nivel == 1 %}
+                <div class="info-panel" id="info-panel-1">
+                    <h4>Informacion Importante del Reglamento</h4>
+                    <ul>
+                        <li>Se requiere 80% de asistencia.</li>
+                        <li>Hay 10 minutos de tolerancia.</li>
+                        <li>Las tareas se entregan unicamente en Classroom.</li>
+                        <li>No se aceptan trabajos fuera de tiempo.</li>
+                        <li>Esta prohibido el plagio.</li>
+                        <li>No usar audifonos en clase.</li>
+                        <li>No comer dentro del salon.</li>
+                        <li>El uso de laptops y celulares solo es para actividades de clase.</li>
+                    </ul>
+                    <button type="button" class="btn-submit" onclick="showQuiz(1)" style="margin-top:20px;">He leido y
+                        estoy listo</button>
+                </div>
+
+                <div id="quiz-panel-1" style="display: none;">
+                    <form action="{{ url_for('verify', level=1) }}" method="POST" class="challenge-form">
+                        <h4>Prueba de Conocimiento</h4>
+                        <div class="form-group">
+                            <label>1. Cual es el porcentaje minimo de asistencia requerido?</label>
+                            <select name="q1" required>
+                                <option value="">Selecciona una opcion</option>
+                                <option value="60">60%</option>
+                                <option value="70">70%</option>
+                                <option value="80">80%</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>2. Donde se entregan las tareas unicamente?</label>
+                            <select name="q2" required>
+                                <option value="">Selecciona una opcion</option>
+                                <option value="whatsapp">Meet</option>
+                                <option value="correo">Por Airdrop</option>
+                                <option value="classroom">Classroom</option>
+
+                            </select>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="commit1" name="commitment" required>
+                            <label for="commit1">Me comprometo a cumplir estas reglas en clase.</label>
+                        </div>
+                        <button type="submit" class="btn-submit">Desbloquear Nivel 2</button>
+                    </form>
+                </div>
+                {% else %}
+                <div class="info-panel">
+                    <p>Has superado esta prueba.</p>
+                </div>
+                {% endif %}
+            </div>
+            {% else %}
+            <div class="locked-content">
+
+            </div>
+            {% endif %}
+        </section>
+
+        <section class="level-card {% if nivel < 2 %}locked{% endif %}" id="level-2">
+            <div class="card-header">
+                <h3>Nivel 2: El Oraculo de las Notas</h3>
+                <span class="status-badge">{% if nivel > 2 %}SUPERADO{% elif nivel == 2 %}ACTIVO{% else %}BLOQUEADO{%
+                    endif %}</span>
+            </div>
+
+            {% if nivel >= 2 %}
+            <div class="card-body">
+                {% if nivel == 2 %}
+                <div class="info-panel" id="info-panel-2">
+                    <h4>Porcentajes de Evaluacion Primer Parcial</h4>
+                    <ul class="stats-list">
+                        <li><span>Evidencia de conocimiento</span> <span class="stat-value">40%</span></li>
+                        <li><span>Evidencia de desempeño</span> <span class="stat-value">20%</span></li>
+                        <li><span>Evidencia de producto</span> <span class="stat-value">30%</span></li>
+                        <li><span>Proyecto integrador</span> <span class="stat-value">10%</span></li>
+                    </ul>
+                    <button type="button" class="btn-submit" onclick="showQuiz(2)" style="margin-top:20px;">He leido y
+                        estoy listo</button>
+                </div>
+
+                <div id="quiz-panel-2" style="display: none;">
+                    <form action="{{ url_for('verify', level=2) }}" method="POST" class="challenge-form">
+                        <h4>Prueba de Conocimiento</h4>
+                        <div class="form-group">
+                            <label>1. Cuanto vale la Evidencia de conocimiento?</label>
+                            <select name="q1" required>
+                                <option value="">Selecciona una opcion</option>
+                                <option value="30">30%</option>
+                                <option value="40">40%</option>
+                                <option value="50">50%</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>2. Cuanto vale el Proyecto integrador?</label>
+                            <select name="q2" required>
+                                <option value="">Selecciona una opcion</option>
+                                <option value="10">10%</option>
+                                <option value="20">20%</option>
+                                <option value="30">30%</option>
+                            </select>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="commit2" name="commitment" required>
+                            <label for="commit2">Entiendo y acepto los porcentajes de evaluación.</label>
+                        </div>
+                        <button type="submit" class="btn-submit">Desbloquear Nivel 3</button>
+                    </form>
+                </div>
+                {% else %}
+                <div class="info-panel">
+                    <p>Has superado esta prueba.</p>
+                </div>
+                {% endif %}
+            </div>
+            {% else %}
+            <div class="locked-content">
+
+            </div>
+            {% endif %}
+        </section>
+
+        <section class="level-card {% if nivel < 3 %}locked{% endif %}" id="level-3">
+            <div class="card-header">
+                <h3>Nivel 3: Skills a Desbloquear</h3>
+                <span class="status-badge">{% if nivel > 3 %}SUPERADO{% elif nivel == 3 %}ACTIVO{% else %}BLOQUEADO{%
+                    endif %}</span>
+            </div>
+
+            {% if nivel >= 3 %}
+            <div class="card-body">
+                {% if nivel == 3 %}
+                <div class="info-panel" id="info-panel-3">
+                    <h4>Objetivo de la Materia</h4>
+                    <p>Desarrollar aplicaciones moviles mediante lenguajes de programacion y
+                        herramientas de desarrollo movil.</p>
+
+                    <h4>Competencias</h4>
+                    <div class="skills-grid">
+                        <div class=>Crearemos apps moviles</div>
+                        <div class=>Diseñaremos interfaces</div>
+                        <div class=>Usaremos frameworks y POO</div>
+                        <div class=>Implementaremos soluciones tecnologicas</div>
+                    </div>
+
+                    <h4>Temario</h4>
+                    <ul class="temario-list">
+                        <li><strong>Unidad I:</strong> Introducción al desarrollo</li>
+                        <li><strong>Unidad II:</strong> Diseño de aplicaciones</li>
+                        <li><strong>Unidad III:</strong> Programación</li>
+                        <li><strong>Unidad IV:</strong> Publicación</li>
+                    </ul>
+                    <button type="button" class="btn-submit" onclick="showQuiz(3)" style="margin-top:20px;">He leído y
+                        estoy listo</button>
+                </div>
+
+                <div id="quiz-panel-3" style="display: none;">
+                    <form action="{{ url_for('verify', level=3) }}" method="POST" class="challenge-form">
+                        <h4>Prueba de Conocimiento</h4>
+                        <div class="form-group">
+                            <label>1. Que tipo de aplicaciones desarrollaremos?</label>
+                            <select name="q1" required>
+                                <option value="">Selecciona una opcion</option>
+                                <option value="web">Aplicaciones Web</option>
+                                <option value="escritorio">Aplicaciones de Escritorio</option>
+                                <option value="moviles">Aplicaciones Moviles</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>2. Una de las competencias es diseñar...</label>
+                            <select name="q2" required>
+                                <option value="">Selecciona una opcion</option>
+                                <option value="bases">Bases de datos</option>
+                                <option value="interfaces">Interfaces</option>
+                                <option value="redes">Redes</option>
+                            </select>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="commit3" name="commitment" required>
+                            <label for="commit3">Estoy listo para aprender y no reprobar en el intento</label>
+                        </div>
+                        <button type="submit" class="btn-submit">Desbloquear Nivel 4</button>
+                    </form>
+                </div>
+                {% else %}
+                <div class="info-panel">
+                    <p>Has superado esta prueba.</p>
+                </div>
+                {% endif %}
+            </div>
+            {% else %}
+            <div class="locked-content">
+
+            </div>
+            {% endif %}
+        </section>
+
+        <section class="level-card {% if nivel < 4 %}locked{% endif %}" id="level-4">
+            <div class="card-header">
+                <h3>Nivel 4: La Linea del Tiempo</h3>
+                <span class="status-badge">{% if nivel > 4 %}SUPERADO{% elif nivel == 4 %}ACTIVO{% else %}BLOQUEADO{%
+                    endif %}</span>
+            </div>
+
+            {% if nivel >= 4 %}
+            <div class="card-body">
+                {% if nivel == 4 %}
+                <div class="info-panel" id="info-panel-4">
+                    <h4>Periodo del Cuatrimestre: Mayo 2026 a Agosto 2026</h4>
+
+
+                    <h4>Fechas de Batalla (Examenes)</h4>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <span class="date">02-06-26</span>
+                            <span class="event">1er Parcial</span>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="date">07-07-26</span>
+                            <span class="event">2do Parcial</span>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="date">11-08-26</span>
+                            <span class="event">3er Parcial</span>
+                        </div>
+                        <div class="timeline-item ">
+                            <span class="date">17-08-26</span>
+                            <span class="event">Examen Final</span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-submit" onclick="showQuiz(4)" style="margin-top:20px;">He leído y
+                        estoy listo para no reprobar</button>
+                </div>
+
+                <div id="quiz-panel-4" style="display: none;">
+                    <form action="{{ url_for('verify', level=4) }}" method="POST" class="challenge-form">
+                        <h4>Prueba Final</h4>
+                        <div class="form-group">
+                            <label>1. Que dia es el examen Final?</label>
+                            <select name="q1" required>
+                                <option value="">Selecciona una opcion</option>
+                                <option value="11-08">11 de Agosto</option>
+                                <option value="17-08">17 de Agosto</option>
+                                <option value="02-06">2 de Junio</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>2. En que mes termina el cuatrimestre?</label>
+                            <select name="q2" required>
+                                <option value="">Selecciona una opcion</option>
+                                <option value="julio">Julio</option>
+                                <option value="agosto">Agosto</option>
+                                <option value="septiembre">Septiembre</option>
+                            </select>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="commit4" name="commitment" required>
+                            <label for="commit4">Estudiaré para los examenes.</label>
+                        </div>
+                        <button type="submit" class="btn-submit">Completar Aventura!</button>
+                    </form>
+                </div>
+                {% else %}
+                <div class="info-panel">
+                    <p>Has superado esta prueba.</p>
+                </div>
+                {% endif %}
+            </div>
+            {% else %}
+            <div class="locked-content">
+
+            </div>
+            {% endif %}
+        </section>
+
+        {% if nivel > 4 %}
+        <section class="victory-card fade-in">
+            <h2>RETO COMPLETADO</h2>
+            <p>Ahora estas preparado para sobrevivir a la materia y crear aplicaciones</p>
+
+            <a href="{{ url_for('reset') }}" class="btn-submit"
+                style="display:inline-block; margin-top:20px; text-decoration:none;">Reiniciar Aventura</a>
+        </section>
+        {% endif %}
+
+    </div>
+
+    <script>
+        function showQuiz(level) {
+            document.getElementById('info-panel-' + level).style.display = 'none';
+            document.getElementById('quiz-panel-' + level).style.display = 'block';
+        }
+
+        window.onload = () => {
+            if (window.location.hash) {
+                const element = document.querySelector(window.location.hash);
+                if (element) {
+                    setTimeout(() => {
+                        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 300);
+                }
+            }
+        };
+    </script>
+</body>
+
+</html>
