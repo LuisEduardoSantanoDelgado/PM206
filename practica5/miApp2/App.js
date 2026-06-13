@@ -11,23 +11,16 @@ import { Perfil } from './components/Perfil';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>--------------Componente nativo--------------</Text>
 
-      <Text>Hola Mundo</Text>
-
-      <Image
-        source={require('./assets/wave.png')}
-        style={styles.image}
-      />
-
-      <Text>--------------Componente simple--------------</Text>
-      <Saludo />
-
-      <Text>--------------Componente propio--------------</Text>
-      <Salu2 />
 
       <Text>--------------Perfil--------------</Text>
-      <Perfil />
+      <Perfil nombre="luis Eduardo" carrera="Sistemas" materia="Programacion Móvil" semestre="9"/>
+
+      <Text>--------------Segundo Perfil--------------</Text>      
+      <Perfil nombre="mau" carrera="mau" materia=" hola" semestre="32"></Perfil>
+
+
+
 
       <StatusBar style="auto" />
     </View>
