@@ -1,53 +1,55 @@
 /*Perfil Usando Props */
 
-import { Text, View, Button } from 'react-native';
+import { Text, View, Button, StyleSheet } from 'react-native';
 
 import React, { useState } from 'react';
 
-/* export const Perfil = (props) => {
-  return (
-    <View>
-      <Text>{props.nombre}</Text>
-      <Text>{props.carrera}</Text>
-      <Text>{props.materia}</Text>
-      <Text>{props.semestre}</Text>
+const estiolos = StyleSheet.create({
+  nombre: {
+    fontSize: 24,
+    fontWeight: '700',
+    textTransform: "uppercase"
+  },
 
+  carrera: {
+    fontSize: 18,
+    color: 'orange',
+    fontFamily: 'Arial'
+  },
 
-    </View>
-  );
-}; */
+  otroTexto: {
+    fontSize: 12,
+    fontFamily: 'Courier',
+    fontStyle: 'italic'
+  },
 
+  tarjeta: {
+    borderWidth: 3,
+    margin: 20,
+    padding: 25,
+  }
+});
 
 /*Perfil Usando destructuración */
-export const Perfil = ({ nombre, carrera, materia, semestre }) => {
-
+export const Perfil = ({ nombre, carrera, materia, semestre, estiloE }) => {
   const [mostrar, setMostrar] = useState(false);
 
   return (
-
-    <View>
-      <Text>{nombre}</Text>
-
+    <View style={[estiolos.tarjeta, estiloE]}>
+      <Text style={estiolos.nombre}>{nombre}</Text>
 
       {mostrar && (
-
         <>
-
-          <Text>{carrera}</Text>
-          <Text>{materia}</Text>
-          <Text>{semestre}</Text>
-
+          <Text style={estiolos.carrera}>{carrera} </Text>
+          <Text style={estiolos.otroTexto}>{materia}</Text>
+          <Text style={estiolos.otroTexto}>{semestre}</Text>
         </>
-
       )}
-      
+
       <Button
         title="Ver perfil"
         onPress={() => setMostrar(!mostrar)}
       />
-
     </View>
-
   );
-
 };

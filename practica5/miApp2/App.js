@@ -13,11 +13,11 @@ export default function App() {
     <View style={styles.container}>
 
 
-      <Text>--------------Perfil--------------</Text>
-      <Perfil nombre="luis Eduardo" carrera="Sistemas" materia="Programacion Móvil" semestre="9"/>
+      <Perfil estiloE={styles.tarjetaRoja} nombre="Eduardo" carrera="Sistemas" materia="Programacion Móvil" semestre="9"/>
+   
+      <Perfil estiloE={styles.tarjetaVerde} nombre="Mauricio" carrera="mau" materia=" hola" semestre="32"></Perfil>
 
-      <Text>--------------Segundo Perfil--------------</Text>      
-      <Perfil nombre="mau" carrera="mau" materia=" hola" semestre="32"></Perfil>
+      <Perfil estiloE={styles.tarjetaRoja} nombre="Eduardo2" carrera="Sistemas" materia="Programacion Móvil" semestre="9"/>
 
 
 
@@ -34,7 +34,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent:'center',
+    flexDirection:'row'
+
+    
+
+
   },
+  tarjetaRoja:{backgroundColor:'#FF6B6B'},
+  tarjetaVerde:{backgroundColor:'#2bc520ff'},
+
+
 
 });
