@@ -1,10 +1,13 @@
 /* Zona 1: Importaciones de componentes y archivos */
 
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View,  } from 'react-native';
 import MenuScreen from './screens/MenuScreen';
 
 /* Zona 2: Main - Hogar de los componentes */
+
+const activo = true;
+
 
 export default function App() {
   return (
