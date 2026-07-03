@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {View,Text,StyleSheet,ImageBackground,ActivityIndicator } from 'react-native';
 
-import * as SplashScreen from 'expo-splash-screen';
-
-SplashScreen.preventAutoHideAsync().catch(() => {
-  /* Manejar errores silenciosos */
-});
-
 export default function FondoPantalla() {
   const [loading, setLoading] = useState(true);
 
@@ -26,15 +20,6 @@ export default function FondoPantalla() {
     prepararAplicacion();
   }, []);
 
-  
-  useEffect(() => {
-    if (!loading) {
-      
-      SplashScreen.hideAsync();
-    }
-  }, [loading]);
-
-  
   if (loading) {
     return (
       <View style={styles.splash}>
