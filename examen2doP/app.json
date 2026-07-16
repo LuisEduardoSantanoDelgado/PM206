@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "examen2doP",
+    "slug": "examen2dop",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "platforms": ["ios", "android", "web"]
+  }
+}
