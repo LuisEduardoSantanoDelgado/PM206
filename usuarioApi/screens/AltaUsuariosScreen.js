@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { View, SafeAreaView, Text, TextInput, Pressable, StyleSheet, } from 'react-native';
+import { useRouter } from 'expo-router';
 
 export default function App() {
   const [nombre, setNombre] = useState('');
   const [edad, setEdad] = useState('');
+  const router = useRouter();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -29,7 +31,10 @@ export default function App() {
           onChangeText={setEdad}
         />
 
-        <Pressable style={styles.boton}>
+        <Pressable 
+          style={styles.boton}
+          onPress={() => router.push('/consulta')}
+        >
           <Text style={styles.textoBoton}>
             Agregar Usuario
           </Text>
