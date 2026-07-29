@@ -3,6 +3,7 @@
     "name": "repa2",
     "slug": "repa2",
     "version": "1.0.0",
+    "scheme": "repa2",
     "orientation": "portrait",
     "icon": "./assets/splash-icon.png",
     "userInterfaceStyle": "light",
