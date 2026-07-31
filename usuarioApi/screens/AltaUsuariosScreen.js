@@ -23,7 +23,7 @@ export default function App() {
     try {
       setCargando(true);
       // Usando tu IP real para que el iPhone pueda comunicarse con la Mac
-      let baseUrl = 'http://10.16.3.24:5004';
+      let baseUrl = 'http://10.16.3.48:5004';
       if (Platform.OS === 'android') baseUrl = 'http://10.0.2.2:5004';
 
       const respuesta = await fetch(`${baseUrl}/v1/usuarios/`,

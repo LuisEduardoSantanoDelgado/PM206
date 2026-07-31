@@ -1,27 +1,32 @@
-import React, { useState, useEffect, use } from 'react';
-import { View, Text, FlatList, StyleSheet, Platform, } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, FlatList, StyleSheet, Platform, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function ConsultaUsuariosScreen() {
 
-  const API_URL = Platform.OS === 'android' ? 'http://10.0.2.2:5004' : 'http://10.16.3.24:5004';
-
+  const API_URL = Platform.OS === 'android' ? 'http://10.0.2.2:5004' : 'http://10.16.3.48:5004';
+  const router = useRouter();
   const [usuarios, setUsuarios] = useState([]);
+  const isFocused = useIsFocused();
+
+  const fetchUsuarios = async () => {
+    try {
+      const respuesta = await fetch(`${API_URL}/v1/usuarios/`);
+      const datos = await respuesta.json();
+      console.log("Respuesta API:", datos);
+      setUsuarios(datos.usuarios);
+    } catch (error) {
+      console.error('Error API:', error);
+    }
+  };
 
   useEffect(() => {
-    const fetchUsuarios = async () => {
-      try {
-        const respuesta = await fetch(`${API_URL}/v1/usuarios/`);
-        const datos = await respuesta.json();
-        console.log("Respuesta API:", datos);
-        setUsuarios(datos.usuarios);
-      } catch (error) {
-        console.error('Error API:', error);
-      }
-    };
-
-    fetchUsuarios();
-  }, []);
+    if (isFocused) {
+      fetchUsuarios();
+    }
+  }, [isFocused]);
 
   const renderTarjeta = ({ item }) => (
     <View style={styles.card}>
@@ -33,6 +38,15 @@ export default function ConsultaUsuariosScreen() {
       <Text style={styles.info}>
         Edad: {item.edad} años
       </Text>
+
+      <TouchableOpacity
+        onPress={() => router.push({
+          pathname: '/detalles',
+          params: { id: item.id, nombre: item.nombre, edad: item.edad }
+        })}
+      >
+        <Text style={styles.verDetalles}>Ver detalles </Text>
+      </TouchableOpacity>
 
     </View>
   );
@@ -47,7 +61,7 @@ export default function ConsultaUsuariosScreen() {
 
       <FlatList
         data={usuarios}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
         renderItem={renderTarjeta}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 20 }}
@@ -105,6 +119,13 @@ const styles = StyleSheet.create({
   info: {
     fontSize: 16,
     color: '#4B5563',
+  },
+
+  verDetalles: {
+    fontSize: 14,
+    color: '#2563EB',
+    textAlign: 'right',
+    marginTop: 10,
   },
 
 });
