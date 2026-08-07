@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "repa2",
+    "name": "Gestión de Usuarios UPQ",
     "slug": "repa2",
     "version": "1.0.0",
     "scheme": "repa2",
     "orientation": "portrait",
-    "icon": "./assets/splash-icon.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
@@ -17,6 +17,7 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.upq.usuarioapi",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -25,6 +26,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "75786fe1-5cf3-4c12-9972-c63ca2c6cf65"
+      }
     }
   }
 }
